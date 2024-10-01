@@ -9,7 +9,7 @@
 
 The description of this challenge states that invoking the `hello` command would give us the required flag.
 
-In a previous example `whoami` is invoked by being typed into the prompt and pressing enter which prints `hacker` in the terminal screen.
+In a previous example, `whoami` is   typed into the prompt and pressing enter prints `hacker` in the terminal screen.
 
 Therefore typing `hello` and pressing the enter key retrieves flag `pwn.college{oERCrKzcHsev9cTG_t7xCMwdxE8.ddjNyUDLzQjN0czW}`
 
