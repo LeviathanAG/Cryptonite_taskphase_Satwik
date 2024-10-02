@@ -15,7 +15,7 @@ This module of Linux Lunarium is all about file paths.
 
 In this challenge, We learn how to access/invoke a file using this path.
 
-Therefore, to get invoke the file we give the exact path starting with `/` and this path is called the `absolute path`.
+Therefore, to invoke the file we give the exact path starting with `/` and this path is called the `absolute path`.
 
 
 In the challenge, I retrieved the flag by invoking the program `pwn` by using the absolute path `/pwn`.
