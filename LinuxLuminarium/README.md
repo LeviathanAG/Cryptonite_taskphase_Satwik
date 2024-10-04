@@ -1,7 +1,6 @@
 # Cryptonite Task Phase
 
-This repository contains all my write-ups for the modules of Linux Luminarium.
-
+This repository contains all my write-ups for Linux Luminarium.
 
 ![](https://i.imgur.com/QevQHmx.png)
 
