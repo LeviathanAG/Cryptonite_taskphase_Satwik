@@ -1,9 +1,15 @@
 # Hello Hackers
 
+![](https://i.imgur.com/KC9GHzf.png)
 
+- [Hello Hackers](#hello-hackers)
+  - [Intro to Commands](#intro-to-commands)
+  - [Intro to Arguments](#intro-to-arguments)
+  - [Completion](#completion)
+  
   In this first module of Linux lunarium, The task was to execute commands on the terminal along with commands with arguments.
 
-## Introduction To Commands
+## Intro to Commands
   
 
 
@@ -16,7 +22,7 @@ Therefore typing `hello` and pressing the enter key retrieves flag `pwn.college{
 Note: Commands in linux are case sensitive.
 
 
-## Introduction To Arguments
+## Intro to Arguments
 
 The description of this challenge gives us a brief description on what passing an argument is. 
 Which is:
@@ -29,3 +35,6 @@ As expected, we get `hello hackers` as the output.
 
 Moving on to the challenge, I had to type the `hello` command (without the echo) with `hackers` as the argument and hit the enter key to get the flag :
 `pwn.college{MEFLqur_IYn5P6YxTPZrf-pwQ0e.dhjNyUDLzQjN0czW}`
+
+# Completion
+![](https://i.imgur.com/p4dCEUp.png)
