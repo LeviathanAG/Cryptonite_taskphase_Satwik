@@ -150,7 +150,7 @@ On googling what these meant, I learn that apropos is used to search for command
 Source : https://www.geeksforgeeks.org/apropos-command-in-linux-with-examples/
 
 
- I tried `man -k falg` which got me to this :
+ I tried `man -k challenge` which got me to this :
  ```
  hacker@man~searching-for-manuals:~$ man -k challenge
 szcpsbozpp (1)       - print the flag!
