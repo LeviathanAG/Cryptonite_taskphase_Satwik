@@ -216,7 +216,6 @@ I used the command `/challenge/challenge -p`to get `22` as the vlaue and then us
 ```
 hacker@man~helpful-programs:~$ /challenge/challenge -p
 The secret value is: 22
-hacker@man~helpful-programs:~$ /challenge/challenge -g GIVE_THE_FLAG 22
 
 hacker@man~helpful-programs:~$ /challenge/challenge --give-the-flag 22
 Correct usage! Your flag: pwn.college{QAbq0HyqaAvz2k2crW3xjHyyqXu.ddjM4QDLzQjN0czW}
