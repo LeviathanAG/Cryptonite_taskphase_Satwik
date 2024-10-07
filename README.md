@@ -8,3 +8,4 @@ This repository contains all my write-ups for Linux Luminarium.
 - [Hello Hackers](./LinuxLuminarium/HelloHackers.md)
 - [Pondering Paths](./LinuxLuminarium/Pondering_Paths.md)
 - [Comprehending Commands](./LinuxLuminarium/Comprehending_Commands.md)
+- [Digesting_Documentation](./LinuxLuminarium/Digesting_Documentation.md)
