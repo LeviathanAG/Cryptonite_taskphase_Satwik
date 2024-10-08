@@ -418,7 +418,7 @@ Attachment : https://drive.proton.me/urls/475BPAQZ44#S4D5x7911lhg
 
 A corrupted PNG. I look through the text file of the png for the flag, but there is nothing of note. Only hint is that the 1st line says fix_meto_crackme, Which means we have no option other than fixing the png. I try some online png "fixers", to uncorrupt an image, but it doesn't work. I look through the txt file, And find repetetive text. I remove it, but it still doesn't work. I try to convert the file into a png, gif, avif, But that also doesn't work.
 
-I learn about how a png is structured using :
+I learn't about how a png is structured using :
 http://www.libpng.org/pub/png/spec/1.2/PNG-Structure.html
  
 We took a random SS in png format and copied it's header and changed the header(first line) using `Hexed.it` to Fix the png and got the flag.
