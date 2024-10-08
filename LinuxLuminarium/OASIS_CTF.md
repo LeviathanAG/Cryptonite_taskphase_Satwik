@@ -371,7 +371,7 @@ Unzipping the folder reveals a pdf. I look through the pdf. It's a research pape
 
 ![alt text](/assets/image-14.png)
 
-I opened it in VSCODE and if we check the commits using source control, we find the flag.
+I opened it in VSCODE and if we check the commits using source control, we find the flag in order of oldest to earliest.
 
 ![alt text](/assets/image-15.png)
 
@@ -424,6 +424,14 @@ http://www.libpng.org/pub/png/spec/1.2/PNG-Structure.html
 We took a random SS in png format and copied it's header and changed the header(first line) using `Hexed.it` to Fix the png and got the flag.
 
 ## All that for a drop of blood
+
+As the terminal roars back to life, a single message blinks on the screen: "START GAME." You're no longer just a playerâ€”you're in the endgame now.
+
+ The keyboard before you looks deceptively simple, but nothing you try gets past the loading screen. Something is clearly wrong. Can you uncover the hidden flaw and push beyond this stagnant start? 
+ 
+ https://startgame.oasis.cryptonite.live
+
+
 
 I inspect element the page and try to find something. Nothing was found. When I click play, it does a POST request, 
 
@@ -498,6 +506,148 @@ X-OASIS-Player: true
 
 
 ## A Rocky Start
+
+The game has finally loaded! Yet, as you start to play, a sinking realization dawns: youâ€™ve been led into a trap. The virus has ensnared you in a loop, wasting precious time. The game is rigged to stall your progress. To save OASIS, you must break free of this digital decoy and bypass the virusâ€™s stalling tactics. Sometimes, you need to overflow the memoryâ€™s expectations to find a way out. The game is broken; you can't shoot. However, only if you get a score of 100 or more can you get the flag. 
+
+Attachment : https://drive.proton.me/urls/VMS229K014#XxAsaHEQy96x
+
+We ch mod the game and run it on my friend's linux distro. There was no way to shoot or do anything useful. We used ghidra to decompile GameAssembly.so but since we didn't understand anything we went to a different direction.
+
+There are many memory addresses with the value of 0. And if I want to figure out which one of them correspond to the value of score, I'll have to change the value of score atleast once, Which is not possible.  I traced back my steps  and read the hint "Memory overflow". I immediately realise that at the start of the game, We input our name, Which is the only thing we can input into the game. I change my name to a really long series of As, and it makes the score change to '0000' from '0'. This means the values are overflowing. So next, I have a long series of As, but with the Hex value of 100 at the end as my name.
+
+This makes the name value overflow and go into score. The score goes over 100 and I get the flag successfully.
+
+(Dont have any pictures since my laptop wasn't used in the challenge much)
+
+## Comma separated ..... virus
+
+Victory comes not from playing the game, but from outwitting it. Yet, even as you break free, you realize the virus has hidden itself deep within the OASIS database. Thousandsâ€”maybe millionsâ€”of data fragments fill the screen. Somewhere among them, the virus lies dormant, waiting to strike again. Itâ€™s time to sift through the noise and identify the hidden threat. Using the basics of machine learning, perform exploratory data analysis to try and figure out a pattern. Can you find the virus among the data? A
+
+Attachment: https://drive.proton.me/urls/VQWR1TCM14#nkQTeNYchCz8
+
+After downloading the csv, I realised how large it was. Taking a closer look, I realised only the first 10000 rows actually contain proper information with the cat names. The rest were there just to just distract us. I removed/truncated everything except the first 10000. I tried a lot of things, Such as K Clustering, Finding all the values inside the brackets, and more. We was stuck for hours, Until we just sorted the values by descending order of tune, Which yielded us the flag.
+
+![alt text](/assets/image6969.png)
+
+
+## Mo-Sike
+
+Youâ€™ve uncovered the truth: it was a Trojan all along. Disguised as an integral part of the OASIS, the virus has been feeding vital information to IOI, undermining the system from within. 
+
+Now, with its cover blown, you must track the data trails left behind by the Trojan before it can do any more damage. These data trails are in the form of a file containing a sequence of color names, each representing a piece of a larger mosaic. This mosaic forms a square grid, and when the squares are correctly arranged, they reveal a hidden image of a video game character.
+
+ Your task is to decipher the relationship between the color list and the grid, reconstructing the image by placing each colored square in its correct position. The challenge lies in ensuring that the final arrangement reveals the intended character, with no visual discrepancies. 
+ 
+ Follow the breadcrumbs and uncover its next move. Flag format: OASIS{nameofcharacter_nameofgame} in lowercase 
+
+Attachment: https://drive.proton.me/urls/9JHW8RWZVR#1hLkjhx6AgfN
+
+
+
+One look at the array of colors, and we realised that it was a perfect square. A square of 56. It's most likely a 56x56 image. We made a python program that turns the colors into pixels and outputs it:
+
+```
+from PIL import Image
+import numpy as np
+
+def parse_color(color_string):
+    """Parse color string to RGB tuple."""
+    # Try parsing as RGB tuple
+    try:
+        return tuple(map(int, color_string.strip('()').split(',')))
+    except:
+        # If not RGB tuple, it might be a hex color
+        if color_string.startswith('#'):
+            return tuple(int(color_string[i:i+2], 16) for i in (1, 3, 5))
+        # If it's a color name, you might need to expand this dictionary
+        color_map = {
+            'red': (255, 0, 0),
+            'green': (0, 255, 0),
+            'blue': (0, 0, 255),
+            'white': (255, 255, 255),
+            'black': (0, 0, 0),
+            # Add more colors as needed
+        }
+        return color_map.get(color_string.lower(), (0, 0, 0))
+
+# Read the color data
+with open('color_file.txt', 'r') as file:
+    colors = [parse_color(line.strip()) for line in file]
+
+# Ensure we have 3136 colors
+assert len(colors) == 3136, f"Expected 3136 colors, but got {len(colors)}"
+
+# Create and save the image
+image = Image.new('RGB', (56, 56))
+image.putdata(colors)
+image.save('output_image.png')
+print("Image saved as output_image.png")
+
+# Optionally, display the image
+image.show()
+
+```
+ It was a series of colors in random :
+
+ ![alt](/assets/image117.png)
+
+It looked like a videogame texture, and the amount of red and yellow made me think it's either: Charizard, Charmander, Pikachu sprite from Pokemon:fire red or other GBA games/ROM hacks or something else. I try guessing all these pokemon and it doesn't work. Then I just do the handy simple reverse image search on it, and find out it's "missingno" from Pokemon and that was the correct flag.
+
+## I am Optimus Prime
+
+Amid the chaos, you spot something crucial: a control unit embedded in the mechanoids'' chassis. With a well-timed leap, you manage to access one of the units. A complex matrix of data awaits you inside, but if you can decipher it, you could seize control of the entire robotic army. Can you crack the code and turn the tables on IOI?
+
+ Attachment: https://drive.proton.me/urls/Z5715WJ2ZG#bubCkAYX6dlt
+
+
+
+After trying things like inspect element and other random stuff, We thought of SQL injection. I tried a few commands, like **10; DROP TABLE members /***, But I realised that the inputs were sanitized, Since the page changed and gvae an error. We remembered that every site has one page. robots.txt. and sure enough, it did exist.
+
+It returned this:
+
+```
+User-agent: *f
+Disallow: /hiddenFlag
+```
+
+/hiddenFlag is clearly another endpoint. 
+
+```
+curl -X POST https://blogpost.oasis.cryptonite.live/hiddenFlag
+```
+
+Doing this gives me the result "invalid token". 
+
+Clearly there is some flag or password we have to provide.
+
+I opened up burp suite again.  Added the request "revealFlag = True".
+
+```
+PATCH /hiddenFlag HTTP/2
+Host: blogpost.oasis.cryptonite.live
+Cookie: user_token=ea2b77c8-4721-4e00-97c7-9b5a76a95220
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 20
+Origin: https://blogpost.oasis.cryptonite.live/
+revealFlag=true
+```
+
+```
+curl -X PATCH https://blogpost.oasis.cryptonite.live/hiddenFlag \
+-H "Cookie: user_token=ea2b77c8-4721-4e00-97c7-9b5a76a95220" \
+-H "Content-Type: application/x-www-form-urlencoded" \
+-H "userAgent=OASIS" \
+```
+Doing this a few times reveals the flag.
+
+# END
+We Got stuck in the next challenge for a long time and fell from #6 to #12 to end our marathon and frankly no one could give their all on the last problem since we were very tired after the 2 day ratrace.
+
+
+
+
+
+
 
 
 
