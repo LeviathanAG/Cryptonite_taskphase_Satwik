@@ -601,7 +601,7 @@ Amid the chaos, you spot something crucial: a control unit embedded in the mecha
 
 
 
-After trying things like inspect element and other random stuff, We thought of SQL injection. I tried a few commands, like **10; DROP TABLE members /***, But I realised that the inputs were sanitized, Since the page changed and gvae an error. We remembered that every site has one page. robots.txt. and sure enough, it did exist.
+After trying things like inspect element and other random stuff, We thought of SQL injection. I tried a few commands, like **10; DROP TABLE members /***, But I realised that the inputs were sanitized, Since the page changed and gave an error. We remembered that every site has one page. robots.txt. and sure enough, it did exist.
 
 It returned this:
 
