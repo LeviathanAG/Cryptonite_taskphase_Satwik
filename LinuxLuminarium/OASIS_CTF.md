@@ -23,7 +23,7 @@ https://drive.proton.me/urls/VDMJTAVBH4#nCpqsQV4fGjN
 
 If you download the image in the link :
 
-![alt text](image.png)
+![alt text](/assets/image.png)
 and convert it to base64 and then text using :
 https://base64.guru/converter/decode/text
  
@@ -42,7 +42,7 @@ https://base64.guru/converter/decode/text
 
  I opened the library.txt file and searched for `OASIS{` using ctrl+f which got me the flag.
 
- ![hmmm](image-2.png)
+ ![hmmm](/assets/image-2.png)
 
  Flag : `OASIS{y0u_fou7d_m3}`
 
@@ -66,9 +66,9 @@ As you discover the secret of the key, it enlarges and splits into two parts, fl
 
 A simple look at the js files in sources after inspect elementing the page gave me the key.
 
-![ok1](image-3.png)
+![ok1](/assets/image-3.png)
 
-![ok2](image-4.png)
+![ok2](/assets/image-4.png)
 
 ## Keynough is enough
 
@@ -76,7 +76,7 @@ You find both parts of the key and reach the door, but realize that in order to 
 
  If a key is given and a cypher is given, It might be a Vigenere cypher. There is also a clue "vinegar" given in the text to indicate this. Decoding the cypher with "WHISPER" as the key yields the answer.
 
-![alt text](image5.png)
+![alt text](/assets/image5.png)
 
  The flag : `OASIS{S1L3N7_V1G3N3R3}`
 
@@ -86,13 +86,13 @@ You find both parts of the key and reach the door, but realize that in order to 
 
 Basically had to prompt engineer the discord bot to get the key. I'll let the pictures speak for itself. (reference to HANS NIEMANN)
 
-![mhmmm](image-5.png)
+![mhmmm](/assets/image-5.png)
 
-![ok132323](image-6.png)
+![ok132323](/assets/image-6.png)
 
-![747](image-7.png)
+![747](/assets/image-7.png)
 
-![lOl](image-8.png)
+![lOl](/assets/image-8.png)
 
 
 ---
@@ -106,7 +106,7 @@ Basically had to prompt engineer the discord bot to get the key. I'll let the pi
 
  Opened up the image in krita cleaned using magic wand and then scanned the qr to get the flag.
 
- ![alt text](image-9.png)
+ ![alt text](/assets/image-9.png)
 
  ---
 
@@ -124,15 +124,15 @@ We download the PDF and look through it. We try to look for offslide elements bu
 
 Then we converted PPT to zip and extracted
 
-![alt text](image-10.png)
+![alt text](/assets/image-10.png)
 
 Opened it,
 
-![alt text](image-11.png)
+![alt text](/assets/image-11.png)
 
 Went to media and then opened the jpeg file to get the flag.
 
-![alt text](image1.jpeg)
+![alt text](/assets/image1.jpeg)
 
 ----
 
@@ -155,7 +155,7 @@ Attachment : https://drive.proton.me/urls/N2ATEN2EMR#001mtOYLDqOq
 
 https://morsecode.world/international/decoder/audio-decoder-adaptive.html
 
-Flag : ![alt text`](image-12.png)
+Flag : ![alt text`](/assets/image-12.png)
 
 
 ---
@@ -170,7 +170,7 @@ I inspect element the page to find any information. The first thing that appears
  
  This immediately reveals that there is a cookie affecting our admin status. I go to the cookies tab and indeed, there is. I change the admin status from false to true, and this yields the flag.
 
-![alt text](image-13.png)
+![alt text](/assets/image-13.png)
 
 
 
@@ -371,11 +371,11 @@ Attachment : https://drive.proton.me/urls/NPCS7GTQPM#EDDwiQ6UtuKg
 
 Unzipping the folder reveals a pdf. I look through the pdf. It's a research paper with nothing of note. I then go back and try to look at the file again. I then unhide my hidden files in my file explorer, and find a `.git` folder. 
 
-![alt text](image-14.png)
+![alt text](/assets/image-14.png)
 
 I opened it in VSCODE and if we check the commits using source control, we find the flag.
 
-![alt text](image-15.png)
+![alt text](/assets/image-15.png)
 
 ---
 
@@ -409,7 +409,7 @@ When converting these ASCII values to text, it reveals:
 
  Played around with the link for a minute and set the number in the link as -1. Yielded me the flag. 
 
- ![alt text](image-17.png)
+ ![alt text](/assets/image-17.png)
 
 
 ## Heads up, tails down
