@@ -589,7 +589,7 @@ image.show()
 ```
  It was a series of colors in random :
 
- ![alt](/assets/image117.png)
+ ![alt](/assets/crct.png)
 
 It looked like a videogame texture, and the amount of red and yellow made me think it's either: Charizard, Charmander, Pikachu sprite from Pokemon:fire red or other GBA games/ROM hacks or something else. I try guessing all these pokemon and it doesn't work. Then I just do the handy simple reverse image search on it, and find out it's "missingno" from Pokemon and that was the correct flag.
 
