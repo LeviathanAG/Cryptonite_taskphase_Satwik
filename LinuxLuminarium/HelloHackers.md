@@ -1,6 +1,5 @@
 # Hello Hackers
 
-![](https://i.imgur.com/KC9GHzf.png)
 
 - [Hello Hackers](#hello-hackers)
   - [Intro to Commands](#intro-to-commands)
