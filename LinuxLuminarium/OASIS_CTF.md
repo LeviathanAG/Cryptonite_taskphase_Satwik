@@ -164,11 +164,9 @@ Flag : ![alt text`](/assets/image-12.png)
 
 The control room door looms before you, locked yet again. Frustration rises, but this isnâ€™t the time to give in. The door is guarded by a â€¦ PACMAN?!!. But he doesnâ€™t seem to be moving.. and giving you way. He looks hungry and angry? https://pacman.oasis.cryptonite.live
 
-
-
-I inspect element the page to find any information. The first thing that appears is a warning by firefox saying this: ` Cookie “admin” does not have a proper “SameSite” attribute value. Soon, cookies without the “SameSite” attribute or with an invalid value will be treated as “Lax”. This means that the cookie will no longer be sent in third-party contexts. If your application depends on this cookie being available in such contexts, please add the “SameSite=None“ attribute to it. To know more about the “SameSite“ attribute, read :` https://developer.mozilla.org/docs/Web/HTTP/Headers/Set-Cookie/SameSite 
+I inspect element the page to find any information. The first thing that appears is a warning by firefox saying this: ` Cookie “admin” does not have a proper “SameSite” attribute value. Soon, cookies without the “SameSite” attribute or with an invalid value will be treated as “Lax”. This means that the cookie will no longer be sent in third-party contexts. If your application depends on this cookie being available in such contexts, please add the “SameSite=None“ attribute to it. To know more about the “SameSite“ attribute, read :` https://developer.mozilla.org/docs/Web/HTTP/Headers/Set-Cookie/SameSite .
  
- This immediately reveals that there is a cookie affecting our admin status. I go to the cookies tab and indeed, there is. I change the admin status from false to true, and this yields the flag.
+This immediately reveals that there is a cookie affecting our admin status. I go to the cookies tab and indeed, there is. I change the admin status from false to true, and this yields the flag.
 
 ![alt text](/assets/image-13.png)
 
@@ -238,7 +236,7 @@ try {
 }
 
 ```
- We get a katb link : `Katb.in/YUNIORPJ`, However this link is broken. I realised that only 20 or so alphabet had some sort of mapping to another alphabhet, and some of the alphabets without any mapping were in the Link. This means that these alphabets could be replace with any other alphabet, and after trying to brute force for a bit we tried using unique alphabets not used in the cypher and all of them unique. We got around 24 links using a python :
+ We get a katb link : `Katb.in/YUNIORPJ`, However this link is broken. I realised that only 20 or so alphabet had some sort of mapping to another alphabhet, and some of the alphabets without any mapping were in the Link. This means that these alphabets could be replace with any other alphabet, and after trying to brute force for a bit we tried using unique alphabets not used in the cypher and all of them unique. We got around 24 links using node js :
 
  ```const fs = require('fs');
 
@@ -423,7 +421,85 @@ A corrupted PNG. I look through the text file of the png for the flag, but there
 I learn about how a png is structured using :
 http://www.libpng.org/pub/png/spec/1.2/PNG-Structure.html
  
-We cleverly took a random
+We took a random SS in png format and copied it's header and changed the header(first line) using `Hexed.it` to Fix the png and got the flag.
+
+## All that for a drop of blood
+
+I inspect element the page and try to find something. Nothing was found. When I click play, it does a POST request, 
+
+![alt text](/assets/image18.png)
+
+I try to look through the cookies, But nothing was found. Somehow the website is authenticating us without storing anything on our machine. This means that everything is done on their server. Doing research online suggest packet manipulation. I installed Burp Suite, An application for intercepting packets. I intercept the packets going from my browser to the website.
+
+![alt text](/assets/image69.png)
+
+I intercepted the packets to modify the packets at each interval to get the flag using :
+
+```
+POST /game?player=OASIS HTTP/1.1
+Host: startgame.oasis.cryptonite.live
+Content-Length: 36
+Sec-Ch-Ua: "Not;A=Brand";v="24", "Chromium";v="128"
+Content-Type: application/json
+Accept-Language: en-GB,en;q=0.9
+Sec-Ch-Ua-Mobile: ?0
+User-Agent: OASISPlayer
+Sec-Ch-Ua-Platform: "macOS"
+Accept: /
+Origin: https://startgame.oasis.cryptonite.live/
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: cors
+Sec-Fetch-Dest: empty
+Referer: https://startgame.oasis.cryptonite.live/?name=cryptonite
+Accept-Encoding: gzip, deflate, br
+Priority: u=1, i
+X-OASIS-Player: true
+----------
+POST /game?name=CRYPTONITE HTTP/1.1
+Host: startgame.oasis.cryptonite.live
+Content-Length: 36
+Sec-Ch-Ua: "Not;A=Brand";v="24", "Chromium";v="128"
+Content-Type: application/json
+Accept-Language: en-GB,en;q=0.9
+Sec-Ch-Ua-Mobile: ?0
+User-Agent: OASISPlayer
+Sec-Ch-Ua-Platform: "macOS"
+Accept: /
+Origin: https://startgame.oasis.cryptonite.live/
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: cors
+Sec-Fetch-Dest: empty
+Referer: https://startgame.oasis.cryptonite.live/?name=cryptonite
+Accept-Encoding: gzip, deflate, br
+Priority: u=1, i
+X-OASIS-Player: true
+-----
+POST /givemetheFlag?name=CRYPTONITE&rank=4 HTTP/1.1
+Host: startgame.oasis.cryptonite.live
+Content-Length: 36
+Sec-Ch-Ua: "Not;A=Brand";v="24", "Chromium";v="128"
+Content-Type: application/json
+Accept-Language: en-GB,en;q=0.9
+Sec-Ch-Ua-Mobile: ?0
+User-Agent: OASISPlayer
+Sec-Ch-Ua-Platform: "macOS"
+Accept: /
+Origin: https://startgame.oasis.cryptonite.live/
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: cors
+Sec-Fetch-Dest: empty
+Referer: https://startgame.oasis.cryptonite.live/?name=cryptonite
+Accept-Encoding: gzip, deflate, br
+Priority: u=1, i
+X-OASIS-Player: true 
+```
+
+
+
+
+## A Rocky Start
+
+
 
 
 
