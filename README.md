@@ -9,3 +9,4 @@ This repository contains all my write-ups for Linux Luminarium.
 - [Pondering Paths](./LinuxLuminarium/Pondering_Paths.md)
 - [Comprehending Commands](./LinuxLuminarium/Comprehending_Commands.md)
 - [Digesting_Documentation](./LinuxLuminarium/Digesting_Documentation.md)
+- [OASIS CTF](./LinuxLuminarium/OASIS_CTF.md)
