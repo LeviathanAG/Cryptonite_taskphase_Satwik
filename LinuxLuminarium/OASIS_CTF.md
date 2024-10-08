@@ -525,7 +525,7 @@ Victory comes not from playing the game, but from outwitting it. Yet, even as yo
 
 Attachment: https://drive.proton.me/urls/VQWR1TCM14#nkQTeNYchCz8
 
-After downloading the csv, I realised how large it was. Taking a closer look, I realised only the first 10000 rows actually contain proper information with the cat names. The rest were there just to just distract us. I removed/truncated everything except the first 10000. I tried a lot of things, Such as K Clustering, Finding all the values inside the brackets, and more. We was stuck for hours, Until we just sorted the values by descending order of tune, Which yielded us the flag.
+After downloading the csv, I realised how large it was. Taking a closer look, I realised only the first 10000 rows actually contain proper information with the cat names. The rest were there just to just distract us. I removed/truncated everything except the first 10000. I tried a lot of things, Such as K Clustering, Finding all the values inside the brackets, and more. Using a hint in the description, At last, We just sorted the values by descending order of tune, Which yielded us the flag.
 
 ![alt text](/assets/image6969.png)
 
