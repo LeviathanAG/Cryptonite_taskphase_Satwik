@@ -405,7 +405,7 @@ When converting these ASCII values to text, it reveals:
  
   https://firewall.oasis.cryptonite.live
 
- Played around with the link for a minute and set the number in the link as -1. Yielded me the flag. 
+ Tried many different  things in the website but changing the number in the URL to -1 yielded me the flag. 
 
  ![alt text](/assets/image-17.png)
 
