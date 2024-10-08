@@ -37,4 +37,3 @@ Moving on to the challenge, I had to type the `hello` command (without the echo)
 `pwn.college{MEFLqur_IYn5P6YxTPZrf-pwQ0e.dhjNyUDLzQjN0czW}`
 
 # Completion
-![](https://i.imgur.com/p4dCEUp.png)
