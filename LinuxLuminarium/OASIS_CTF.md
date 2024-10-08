@@ -1,8 +1,8 @@
 # OASIS CTF (Comprehensive Writeup)
 
-We plced #12 out of around 200 teams in the OASIS CTF '24 conducted by cryptonite and I'll try my best to explain me and my team's thought processes during this 2-day marathon.
+We placed #12 out of around 200 teams in the OASIS CTF '24 conducted by Cryptonite and I'll try my best to explain me and my team's thought processes during this 2-day marathon.
 
-Im skipping Challenge 1,2,3 because they donot require intellectual currency to solve.
+I'm skipping Challenge 1,2,3 because they donot require intellectual currency to solve.
 
 Might not have some of the flags mentioned because I might've forgotten to save the flag.
 ## Ready Player One
@@ -389,7 +389,7 @@ After running the file using `chmod +x game` and
 `./game`
  in a linux terminal we get this output :
 
-![kknp](image-16.png)
+![kknp](/assets/image-16.png)
 
 After copying the pattern and pasting it into a txt file, There's a section that stands out as it contains ASCII decimal values:
 `"79 65 83 73 83 123 118 51 52 121 95 102 52 110 99 121 95 65 78 53 73 125"`
