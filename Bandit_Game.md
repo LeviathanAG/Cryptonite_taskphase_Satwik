@@ -7,7 +7,7 @@ First we `ssh` into level 0 using `ssh bandit0@bandit.labs.overthewire.org -p 22
  * Used `cat readme` to get the password for level 1 :
   `ZjLjTmM6FvvyRnrb2rfNWOZOTa6ip5If`.
 
-  Then we ssh into the next lvl by changing bandit0 to bandit1 an d the new password.
+  Then we ssh into the next lvl by changing bandit0 to bandit1 and the new password.
 
 ## Level 1-2
 
