@@ -35,7 +35,7 @@ The password : `4oQYVPkxZOOEOO5pTW81FB8j8lxXGUQw`
 
 ## Level 6-7
 
-* Since I could find any file, I searched the entire server using `find / -type f -user bandit7 -group bandit6 -size 33c`
+* Since I could not find any file, I searched the entire server using `find / -type f -user bandit7 -group bandit6 -size 33c`
 but it showed a lot of file whose permission I didnt have so Instead of manually searching I did `find / -type f -user bandit7 -group bandit6 -size 33c 2> /dev/null` to remove them and got a singe file which I cat to get the password.
 
 ```
