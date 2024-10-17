@@ -87,7 +87,7 @@ Password : `4CKMh1JI91bUIZZPXDqGanal4xvAg0JM`
 
 ## Level 9-10
 
-We can use `strings` to lookup humanreadable text and grep it for the `===` precedence pattern.
+We can use `strings` to lookup human readable text and grep it for the `===` precedence pattern.
 I know about strings because I used it in a previous CTF.
 So I use `strings data.txt | grep ====` to get the password.
 
