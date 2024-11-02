@@ -254,7 +254,7 @@ seeing the type, I understood that it had been decompiled from c.
 
 I will try to explain the program now :
 
-so basically in the main function we are giving our argument and then the function is run which stores `7 79 and 3` in memory locations and 1st we do `lsl` operation on `7 and 79` i.e we multiply `79 with 2^7` and we get `10112` as the answer and we stre it in a diff memory location then we do `sdiv` on `10112` and `3` where `10112` is dividend and `3` is divsor and we get `3370`. Now we do a `sub` subtraction operation with `3370` and our argument which as we can see in the main function shld make `w0 = 0` so our argument must be `3370`.
+So basically in the main function we are giving our argument and then the function is run which stores `7 79 and 3` in memory locations and 1st we do `lsl` operation on `7 and 79` i.e we multiply `79 with 2^7` and we get `10112` as the answer and we store it in a diff memory location then we do `sdiv` on `10112` and `3` where `10112` is dividend and `3` is divisor and we get `3370`. Now we do a `sub` subtraction operation with `3370` and our argument which as we can see in the main function shld make `w0 = 0` so our argument must be `3370`.
 
 In the main function, If `w0=0` after func is run, then we run `lc0` and  get `win` or else lco1 is run which is `lose`.
 
@@ -338,6 +338,8 @@ main:
 	.ident	"GCC: (Ubuntu/Linaro 7.5.0-3ubuntu1~18.04) 7.5.0"
 	.section	.note.GNU-stack,"",@progbits
 ```
+
+![alt text](/PicoCTF/imagesforrev/finish.png)
 
 
 ## 
