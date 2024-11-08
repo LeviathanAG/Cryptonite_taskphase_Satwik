@@ -31,6 +31,9 @@ This repository contains all my write-ups for Linux Luminarium, Bandit Game and 
 ### Table of Contents
 
 - [Reverse Engineering](/PicoCTF/reverse_Engg.md)
+- [Cryptography](/PicoCTF/Cryptography.md)
+- [Forensics](/PicoCTF/forensics.md)
+  
   
 
 
