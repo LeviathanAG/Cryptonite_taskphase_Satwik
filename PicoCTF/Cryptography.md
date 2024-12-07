@@ -1,15 +1,5 @@
 # Cryptography
 
-
-
-- [Cryptography](#cryptography)
-  - [C3](#c3)
-    - [Thought process](#thought-process)
-   
-    - [Concepts used](#concepts-used)
-    
-    - [The FLAG](#the-flag)
-
 ## C3
 ### Thought process:
 
@@ -94,3 +84,222 @@ Following the picoCTF flag format I got the flag:
 picoCTF{adlibs}
 ```
 ![alt text](/PicoCTF/imagesforrev/finishc3.png)
+
+## Custom Encryption
+
+The name suggests the encryption is custom (KEK) so let's look at the code for a bit:
+
+```
+from random import randint
+import sys
+
+
+def generator(g, x, p):
+    return pow(g, x) % p
+
+
+def encrypt(plaintext, key):
+    cipher = []
+    for char in plaintext:
+        cipher.append(((ord(char) * key*311)))
+    return cipher
+
+
+def is_prime(p):
+    v = 0
+    for i in range(2, p + 1):
+        if p % i == 0:
+            v = v + 1
+    if v > 1:
+        return False
+    else:
+        return True
+
+
+def dynamic_xor_encrypt(plaintext, text_key):
+    cipher_text = ""
+    key_length = len(text_key)
+    for i, char in enumerate(plaintext[::-1]):
+        key_char = text_key[i % key_length]
+        encrypted_char = chr(ord(char) ^ ord(key_char))
+        cipher_text += encrypted_char
+    return cipher_text
+
+
+def test(plain_text, text_key):
+    p = 97
+    g = 31
+    if not is_prime(p) and not is_prime(g):
+        print("Enter prime numbers")
+        return
+    a = randint(p-10, p)
+    b = randint(g-10, g)
+    print(f"a = {a}")
+    print(f"b = {b}")
+    u = generator(g, a, p)
+    v = generator(g, b, p)
+    key = generator(v, a, p)
+    b_key = generator(u, b, p)
+    shared_key = None
+    if key == b_key:
+        shared_key = key
+    else:
+        print("Invalid key")
+        return
+    semi_cipher = dynamic_xor_encrypt(plain_text, text_key)
+    cipher = encrypt(semi_cipher, shared_key)
+    print(f'cipher is: {cipher}')
+
+
+if __name__ == "__main__":
+    message = sys.argv[1]
+    test(message, "trudeau")
+```
+
+After a little bit of googling I understood that the text() function basically allows two people to derive a shared secret key without directly transmitting it.
+
+* p and g are predefined constants representing a prime modulus and a base
+* Random integers a and b are generated as private keys
+* A shared secret key (key or b_key) is derived AND if they match we can proceed.
+* Next a Xor encryption takes place with the reversed plain text and text_key
+* Then in the encrypt() function, we take the xor encrypted string and extract each value's ascii, multiply with key and also multiply with 311.
+* The output is a list of integers (cipher), representing the final ciphertext.
+
+To Reverse this ecnryption was not easy but  I started out by trying to convert the encrypted text to semi-encrypted text.
+
+I realized I had to get the shared key values u and v first so i wrote the function `halfdecrypt()` which uses `a,b` provided in the text file and `p,g` is given in the pgm also the ciphertext is provided in the text file. and then to get the half decrypted text I just reversed the process using `decrypt()` and then doing the xor reversal was hard and I kept getting stuck in Random places but after reversing and xoring 3 times I got the flag finally. 
+The program :
+
+```
+from random import randint
+import sys
+
+
+def generator(g, x, p):
+    return pow(g, x) % p
+
+
+def encrypt(plaintext, key):
+    cipher = []
+    for char in plaintext:
+        cipher.append(((ord(char) * key*311)))
+    return cipher
+
+
+def is_prime(p):
+    v = 0
+    for i in range(2, p + 1):
+        if p % i == 0:
+            v = v + 1
+    if v > 1:
+        return False
+    else:
+        return True
+
+
+def dynamic_xor_encrypt(plaintext, text_key):
+    cipher_text = ""
+    key_length = len(text_key)
+    for i, char in enumerate(plaintext[::-1]):
+        key_char = text_key[i % key_length]
+        encrypted_char = chr(ord(char) ^ ord(key_char))
+        cipher_text += encrypted_char
+    return cipher_text
+
+def dynamic_xor_decrypt(plaintext, text_key):
+    cipher_text = ""
+    key_length = len(text_key)
+
+    for i, char in enumerate(plaintext[::-1]):
+        key_char = text_key[i % key_length]
+        encrypted_char = chr(ord(char) ^ ord(key_char))
+        cipher_text += encrypted_char
+
+    plaintext = cipher_text
+    cipher_text = ""
+
+    for i, char in enumerate(plaintext[::-1]):
+        key_char = text_key[i % key_length]
+        encrypted_char = chr(ord(char) ^ ord(key_char))
+        cipher_text += encrypted_char
+
+    plaintext = cipher_text
+    cipher_text = ""
+
+    for i, char in enumerate(plaintext[::-1]):
+        key_char = text_key[i % key_length]
+        encrypted_char = chr(ord(char) ^ ord(key_char))
+        cipher_text += encrypted_char
+    
+    return cipher_text
+
+
+def test(plain_text, text_key):
+    p = 97
+    g = 31
+    if not is_prime(p) and not is_prime(g):
+        print("Enter prime numbers")
+        return
+    a = randint(p-10, p)
+    b = randint(g-10, g)
+    print(f"a = {a}")
+    print(f"b = {b}")
+    u = generator(g, a, p)
+    v = generator(g, b, p)
+    key = generator(v, a, p)
+    b_key = generator(u, b, p)
+    shared_key = None
+    if key == b_key:
+        shared_key = key
+    else:
+        print("Invalid key")
+        return
+    semi_cipher = dynamic_xor_encrypt(plain_text, text_key)
+    cipher = encrypt(semi_cipher, shared_key)
+    print(f'cipher is: {cipher}')
+
+def decrypt(cipher, key):
+    plaintext = ""
+    for encrypted_value in cipher:
+        decrypted_value = encrypted_value // (key * 311)
+        plaintext += chr(decrypted_value)
+    return plaintext
+
+def halfdecrypt():
+    p = 97
+    g = 31
+    a = 88
+    b = 26
+
+    u = generator(g, a, p)
+    v = generator(g, b, p)
+    key = generator(v, a, p)
+    b_key = generator(u, b, p)
+
+    shared_key = None
+    if key == b_key:
+        shared_key = key
+   
+    cipher = [97965, 185045, 740180, 946995, 1012305, 21770, 827260, 751065, 718410, 457170, 0, 903455, 228585, 54425, 740180, 0, 239470, 936110, 10885, 674870, 261240, 293895, 65310, 65310, 185045, 65310, 283010, 555135, 348320, 533365, 283010, 76195, 130620, 185045]
+
+    semi_cipher = decrypt(cipher, shared_key)
+
+    flag = dynamic_xor_decrypt(semi_cipher, "trudeau")
+
+    print(flag)
+
+
+if __name__ == "__main__":
+    # message = sys.argv[1]
+    # test(message, "trudeau")
+    halfdecrypt()
+```
+
+The flag : `picoCTF{custom_d2cr0pt6d_019c831c}`
+
+Problems Faced : Since Im unfamiliar with python, It took a long time for me to understand whats going on and also write new code. Also faced problems in `decrypt()` using `/` but learnt about `//` which discards the remained basically removing the `'float' object cannot be interpreted as an integer` error.
+
+## Mini RSA
+Since RSA is a Familiar word, I did some reading on it in GFG.
+https://www.geeksforgeeks.org/rsa-algorithm-cryptography/
+
