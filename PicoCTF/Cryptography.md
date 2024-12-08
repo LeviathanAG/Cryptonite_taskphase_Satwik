@@ -317,7 +317,7 @@ The encyrpted text : ` 220531641393113403107460374692824779903015522125251987265
 
 Now to decrypt the message, I had to do a lot of research but I understood the math pretty easily, The encryption algorithm is as follows, `c = (M ^ e) % N ` , where c = cipher text, M = main text , e = encryption (public) key , N = part of both public and private key
 
-So if N>>>>e then (M**e) % N == (M**e) but if N < e then we cannot just root inverse it to decrypt, so I reverse the algorithm and find out a way to get the plain text , `M = {(N*i) + c} ^ (1/3)` // where , i = any positive integer. So now I was in a pinch but after going through some websites on how one could possibly decode RSA encryptions, I found this : `https://crypto.stackexchange.com/a/80346` and understood that m^3%N != N thus I developed this python script to decode the answer and used the precision hint to get the full flag.
+So if N>>>>e then (M^e) % N == (M^e) but if N < e then we cannot just root inverse it to decrypt, so I reverse the algorithm and find out a way to get the plain text , `M = {(N*i) + c} ^ (1/3)` // where , i = any positive integer. So now I was in a pinch but after going through some websites on how one could possibly decode RSA encryptions, I found this : `https://crypto.stackexchange.com/a/80346` and understood that m^3%N != N thus I developed this python script to decode the answer and used the precision hint to get the full flag.
 
 ```
 from decimal import *
