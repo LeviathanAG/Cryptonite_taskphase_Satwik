@@ -306,4 +306,59 @@ https://www.geeksforgeeks.org/rsa-algorithm-cryptography/
 Also went through the hints where I got more info about RSA encryption. 
 https://en.wikipedia.org/wiki/RSA_(cryptosystem)
 
+2nd hint : How could having too small an e affect the security of this 2048 bit key?
+3rd hint : Make sure you don't lose precision, the numbers are pretty big (besides the e value).
+
+We have been given a very large N : (product of primes) : `29331922499794985782735976045591164936683059380558950386560160105740343201513369939006307531165922708949619162698623675349030430859547825708994708321803705309459438099340427770580064400911431856656901982789948285309956111848686906152664473350940486507451771223435835260168971210087470894448460745593956840586530527915802541450092946574694809584880896601317519794442862977471129319781313161842056501715040555964011899589002863730868679527184420789010551475067862907739054966183120621407246398518098981106431219207697870293412176440482900183550467375190239898455201170831410460483829448603477361305838743852756938687673`
+
+and a small e (hint) : `3`
+
+The encyrpted text : ` 2205316413931134031074603746928247799030155221252519872650073010782049179856976080512716237308882294226369300412719995904064931819531456392957957122459640736424089744772221933500860936331459280832211445548332429338572369823704784625368933`
+
+Now to decrypt the message, I had to do a lot of research but I understood the math pretty easily, The encryption algorithm is as follows, `c = (M ^ e) % N ` , where c = cipher text, M = main text , e = encryption (public) key , N = part of both public and private key
+
+So if N>>>>e then (M**e) % N == (M**e) but if N < e then we cannot just root inverse it to decrypt, so I reverse the algorithm and find out a way to get the plain text , `M = {(N*i) + c} ^ (1/3)` // where , i = any positive integer. So now I was in a pinch but after going through some websites on how one could possibly decode RSA encryptions, I found this : `https://crypto.stackexchange.com/a/80346` and understood that m^3%N != N thus I developed this python script to decode the answer and used the precision hint to get the full flag.
+
+```
+from decimal import *
+from tqdm import tqdm
+
+N = Decimal(29331922499794985782735976045591164936683059380558950386560160105740343201513369939006307531165922708949619162698623675349030430859547825708994708321803705309459438099340427770580064400911431856656901982789948285309956111848686906152664473350940486507451771223435835260168971210087470894448460745593956840586530527915802541450092946574694809584880896601317519794442862977471129319781313161842056501715040555964011899589002863730868679527184420789010551475067862907739054966183120621407246398518098981106431219207697870293412176440482900183550467375190239898455201170831410460483829448603477361305838743852756938687673)
+e = Decimal(3)
+c = Decimal(2205316413931134031074603746928247799030155221252519872650073010782049179856976080512716237308882294226369300412719995904064931819531456392957957122459640736424089744772221933500860936331459280832211445548332429338572369823704784625368933)
+
+
+def int_to_ascii(m):
+    # Decode to ascii (from https://crypto.stackexchange.com/a/80346)
+    m_hex = hex(int(m))[2:-1]  # Number to hex
+    m_ascii = "".join(
+        chr(int(m_hex[i : i + 2], 16)) for i in range(0, len(m_hex), 2)
+    )  # Hex to Ascii
+    return m_ascii
+
+
+# Find padding
+getcontext().prec = 280  # Increase precision
+padding = 0
+for k in tqdm(range(0, 10_000)):
+    m = pow(k * N + c, 1 / e)
+
+    m_ascii = int_to_ascii(m)
+
+    if "pico" in m_ascii:
+        padding = k
+        break
+
+print("Padding: %s" % padding)
+
+# Increase precision further to get entire flag
+getcontext().prec = 700
+
+m = pow(padding * N + c, 1 / e)
+m_ascii = int_to_ascii(m)
+print("Flag: %s" % m_ascii.strip())
+```
+
+The Flag :`Flag: picoCTF{n33d_a_lArg3r_e_ccaa7776}`
+
 
