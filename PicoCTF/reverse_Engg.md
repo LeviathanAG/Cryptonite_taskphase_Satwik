@@ -9,6 +9,7 @@ In this Writeup, we learn how to decompile and understand waht happens under the
 	
 	
 	- [Vault door 3](#vault-door-3)
+	- [ASCII FTW](#ascii-ftw)
 ## GDB baby step 1
 
 
